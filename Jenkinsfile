@@ -5,7 +5,7 @@ pipeline {
         stage("CLONING THE CODE"){
             steps {
                 echo "Cloning the code"
-                git url:"https://github.com/Sohail9991/django-notes-app.git", branch: "main"
+                git url:"https://github.com/Ericsin13/Project-4-cicd-pipeline-of-django-webapp-to-aws-using-docker-jenkins.git", branch: "main"
             }
         }
         stage("BUILDING THE IMAGE"){
@@ -17,10 +17,10 @@ pipeline {
         stage("PUSH TO THE DOCKER HUB"){
             steps {
                 echo "Pushing the image to docker hub"
-                withCredentials([usernamePassword(credentialsId:"dockerHub",passwordVariable:"dockerHubPass",usernameVariable:"dockerHubUser")]){
-                sh "docker tag my-note-app ${env.dockerHubUser}/my-note-app:latestnew"
-                sh "docker login -u ${env.dockerHubUser} -p ${env.dockerHubPass}"
-                sh "docker push ${env.dockerHubUser}/my-note-app:latestnew"
+                withCredentials([usernamePassword(credentialsId: '8cbe2ca0-bd9f-48b5-b09c-4085c68095cf', passwordVariable: 'DOCKER_HUB_PASSWORD', usernameVariable: 'DOCKER_HUB_USERNAME')]){
+                sh "docker tag phill-app ${env.DOCKER_HUB_USERNAME}/phill-app:latestnew"
+                sh "docker login -u ${env.DOCKER_HUB_USERNAME} -p ${env.DOCKER_HUB_PASSWORD}"
+                sh "docker push ${env.DOCKER_HUB_USERNAME}/phill-app:latestnew"
                 }
             }
         }

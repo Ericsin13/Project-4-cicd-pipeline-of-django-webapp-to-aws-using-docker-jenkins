@@ -17,7 +17,7 @@ pipeline {
         stage("BUILD"){
             steps {
                 echo "Building the image"
-                sh "docker build -t ericsin13/stayfit ."
+                sh "docker build -t $DOCKER_HUB_USER/stayfit ."
             }
         }
         stage("PUSH TO THE DOCKER HUB"){
@@ -25,7 +25,7 @@ pipeline {
                 echo "Pushing the image to docker hub"
                withCredentials([usernamePassword(credentialsId: 'b098852c-4be5-4aac-b584-dd0500a74788', passwordVariable: 'DOCKER_HUB_PASSWORD', usernameVariable: 'DOCKER_HUB_USER')]) {
                 sh "echo $DOCKER_HUB_PASSWORD | docker login -u $DOCKER_HUB_USER --password-stdin"
-                sh "docker push ericsin13/stayfit:latest"
+                sh "docker push $DOCKER_HUB_USER/stayfit:latest"
                 }
             }
         }

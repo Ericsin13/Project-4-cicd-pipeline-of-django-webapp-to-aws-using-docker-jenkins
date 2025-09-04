@@ -1,12 +1,11 @@
-
+version: "3.8"
 
 services:
   web:
-    build: .
+    image: ericsin13/befit:latest   
     container_name: fitness
     ports:
-      - "8000:8000"
-    volumes:
-      - .:/app
+      - "80:8000"   
+    restart: always
     environment:
       - DEBUG=True

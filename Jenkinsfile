@@ -17,16 +17,16 @@ pipeline {
         stage("BUILD"){
             steps {
                 echo "Building the image"
-                sh "docker build -t ericsin13/befit ."
+                sh "docker build -t ericsin13/stayfit ."
             }
         }
         stage("PUSH TO THE DOCKER HUB"){
             steps {
                 echo "Pushing the image to docker hub"
-               withCredentials([usernamePassword(credentialsId: '5f0dabc2-138c-4fbc-b8e4-bc3ab03e564b', passwordVariable: 'DOCKER_HUB_PASSWORD', usernameVariable: 'DOCKER_HUB_USER')]) {
-                sh "docker tag befit ${env.DOCKER_HUB_USERNAME}/befit:latest"
+               withCredentials([usernamePassword(credentialsId: '8cbe2ca0-bd9f-48b5-b09c-4085c68095cf', passwordVariable: 'DOCKER_HUB_PASSWORD', usernameVariable: 'DOCKER_HUB_USER')]) {
+                sh "docker tag stayfit ${env.DOCKER_HUB_USERNAME}/stayfit:latest"
                 sh "docker login -u ${env.DOCKER_HUB_USERNAME} -p ${env.DOCKER_HUB_PASSWORD}"
-                sh "docker push ${env.DOCKER_HUB_USERNAME}/befit:latest"
+                sh "docker push ${env.DOCKER_HUB_USERNAME}/stayfit:latest"
                 }
             }
         }
